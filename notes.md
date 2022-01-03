@@ -110,3 +110,25 @@
     return () => console.log("This is destroyed!"); // <<< Clean up part.
   },[]);
 </pre>
+
+💡 `Link`
+<br>For rendering specific component `without rendering` the browser.
+<br>The effect looks like as if the page has been move to the clicked link.
+
+💡 `useParams`
+<br>For getting parameters from URL, the parts where the dynamic variables are set on the Router tag.
+
+💡 `gh-pages`
+<br>A package for deploying the project and hosting it on the github pages.
+<pre>
+"scripts": {
+  ...
+  "deploy": "gh-pages -d build", <<< Pushes the project to the github pages.
+  "predeploy": "npm run build",  <<< Runs before the 'deploy' command.
+  ...
+  }
+  ...
+  "homepage": "https://tyomhk2015,github.io/gocoin",
+  ...
+}
+</pre>
