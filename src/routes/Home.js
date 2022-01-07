@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import { dbService } from "firebase_assets";
 
 function Home() {
   const [post, setPost] = useState('');
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    console.log(post);
+    await dbService.collection('posts').add({
+      post,
+      createdDate: Date.now()
+    });
+    setPost('');
   }
   const onChange = (event) => {
     const {target: {value}} = event;
