@@ -12,7 +12,7 @@ const AppRouter = (props) => {
     <Routes>
       {props.isLoggedIn ? (
         <>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" element={<Home user={props.user}/>} />
           <Route exact path="/profile" element={<Profile />} />
         </>
       ) : 
