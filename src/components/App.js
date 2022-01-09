@@ -9,6 +9,7 @@ function App() {
     authService.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
+        console.log(user.displayName);
       }
       setInit(true);
     });
