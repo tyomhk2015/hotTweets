@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { dbService } from "firebase_assets";
+import { dbService, storageService } from "firebase_assets";
 
 function Post({post, isOwner}) {
   const [isEditing, setIsEditing] = useState(false);
@@ -7,7 +7,12 @@ function Post({post, isOwner}) {
 
   const deletePost = async () => {
     const consent = window.confirm("Will you delete this post?");
-    if(consent) await dbService.doc(`posts/${post.id}`).delete();
+    if(consent) {
+      // Delete the post
+      await dbService.doc(`posts/${post.id}`).delete();
+      // Delete the photo that is attached to this post.
+      await storageService.refFromURL(post.image).delete();
+    }
   }
 
   const toggleEditing = () => {
@@ -39,6 +44,9 @@ function Post({post, isOwner}) {
     ) : (
       <>
         <p>{post.text}</p>
+        {post.image && (
+          <img src={post.image} width="40px" height="40px" alt={`${post.id}'s attachment.`} />
+        )}
         {isOwner && (
           <>
             <button onClick={deletePost}>Delete</button>
