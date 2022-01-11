@@ -12,10 +12,12 @@ function App() {
         // Create a simplified user object for React to track the objects' difference, so the component can be re-rendered.
         const userObj = {
           displayName: user.displayName,
-          uid: user.id,
+          uid: user.uid,
           updateProfile: (args) => user.updateProfile(args),
         };
         setUser(userObj);
+      } else {
+        setUser(null);
       }
       setInit(true);
     });
@@ -25,7 +27,7 @@ function App() {
     const retrievedUser = authService.currentUser;
     const userObj = {
       displayName: retrievedUser.displayName,
-      uid: retrievedUser.id,
+      uid: retrievedUser.uid,
       updateProfile: (args) => retrievedUser.updateProfile(args),
     };
     setUser(userObj);
