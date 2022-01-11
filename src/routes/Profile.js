@@ -26,37 +26,24 @@ function Profile({ user, refreshUser }) {
   };
 
   return (
-    <>
-      <form onSubmit={updateUserName}>
-        <input
-          type='text'
-          placeholder='Display Name'
-          onChange={changeName}
-          value={displayName}
-          required
-        />
-        <input type='submit' value='Update the name' />
-      </form>
-      <button onClick={onLogOutClick}>Log Out</button>
-    </>
+    <div className="routesWrapper">
+      <div className="container">
+        <form onSubmit={updateUserName} className="profileForm">
+          <input
+            type='text'
+            className="formInput"
+            autoFocus
+            placeholder='Display Name'
+            onChange={changeName}
+            value={displayName}
+            required
+          />
+          <input type='submit' className="formBtn" value='Update the name' />
+        </form>
+        <button className="formBtn cancelBtn logOut" onClick={onLogOutClick}>Log Out</button>
+      </div>
+    </div>
   );
 }
 
 export default Profile;
-
-
-// const getMyPosts = async () => {
-//   const retrievedPosts = await dbService
-//     .collection('posts')
-//     .where('creator', '==', user.uid)
-//     .orderBy('createdDate')
-//     .get();
-//   retrievedPosts.docs.map((doc) => {
-//     console.log(doc.data());
-//     return null;
-//   });
-// };
-
-// useEffect(() => {
-//   getMyPosts();
-// }, []);

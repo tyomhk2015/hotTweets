@@ -1,0 +1,342 @@
+@charset "utf-8";
+@import "https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css";
+
+* {
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+input {
+  all: unset;
+  box-sizing: border-box;
+  appearance: none;
+}
+
+body {
+  background-color: black;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  color: white;
+}
+
+button {
+  background-color: white;
+  color: black;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+form {
+  width: 100%;
+}
+
+.post-input::placeholder {
+  color: white;
+  opacity: 0.9;
+}
+
+.container {
+  width: 100%;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container > input {
+  box-sizing: border-box;
+  padding: 8px;
+}
+
+.formInput {
+  width: 100%;
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 1px solid black;
+  text-align: center;
+  background-color: white;
+  color: black;
+}
+
+.formBtn {
+  cursor: pointer;
+  width: 100%;
+  padding: 7px 20px;
+  text-align: center;
+  color: white;
+  border-radius: 20px;
+  background-color: #04aaff;
+  cursor: pointer;
+}
+
+.cancelBtn {
+  cursor: pointer;
+  background-color: tomato;
+}
+
+/* Profile Page */
+
+.profileForm {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+  padding-bottom: 30px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.logOut {
+  margin-top: 50px;
+}
+
+/* Post Form*/
+
+.postForm {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.postInput__container {
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.postInput__input {
+  flex-grow: 1;
+  height: 40px;
+  padding: 0px 20px;
+  color: white;
+  border: 1px solid #04aaff;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 12px;
+  width: 100%;
+}
+
+.postInput__arrow {
+  background-color: #04aaff;
+  height: 40px;
+  width: 40px;
+  padding: 10px 0px;
+  text-align: center;
+  border-radius: 20px;
+  color: white;
+  display: block;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.postInput__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 16px;
+  height: 40px;
+  width: 40px;
+  color: #04aaff;
+  cursor: pointer;
+}
+
+.postInput__label span {
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+.postForm__attachment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.postForm__attachment img {
+  margin-left: 12px;
+  height: 80px;
+  width: 80px;
+  border-radius: 40px;
+}
+
+.postForm__clear {
+  margin-top: 8px;
+  color: #04aaff;
+  cursor: pointer;
+  text-align: center;
+}
+
+.postForm__clear span {
+  margin-right: 10px;
+  font-size: 12px;
+}
+
+/* Post */
+
+.postEdit .formBtn {
+  cursor: pointer;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+
+.post {
+  margin-bottom: 20px;
+  background-color: white;
+  width: 100%;
+  max-width: 320px;
+  padding: 20px;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.post h4 {
+  font-size: 14px;
+}
+
+.post img {
+  left: -60px;
+  top: 0;
+  position: absolute;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+}
+
+.post__actions {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.post__actions button {
+  border: none;
+}
+
+.post__actions button:hover {
+  cursor: pointer;
+}
+
+.post__actions span {
+  cursor: pointer;
+}
+
+.post__actions span:first-child {
+  margin-right: 10px;
+}
+
+/* Auth */
+
+.authContainer {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+}
+
+.authBtns {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 320px;
+}
+
+.authBtn {
+  cursor: pointer;
+  border-radius: 20px;
+  border: none;
+  padding: 10px 0px;
+  font-size: 12px;
+  text-align: center;
+  width: 150px;
+  background: white;
+  cursor: pointer;
+}
+
+/* AuthForm */
+
+.authInput {
+  max-width: 320px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 30px;
+  background-color: rgba(255, 255, 255, 1);
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: black;
+}
+
+.authSubmit {
+  text-align: center;
+  background: #04aaff;
+  color: white;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.authError {
+  color: tomato;
+  text-align: center;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+.authSwitch {
+  color: #04aaff;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 50px;
+  display: block;
+  font-size: 12px;
+}
+
+.authSwitch:hover {
+  text-decoration: underline;
+}
+
+.navList {
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.navLinkHome {
+  margin-top: 10px;
+}
+
+.navLinkProfile {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+}
+
+.routesWrapper {
+  max-width: 890px;
+  width: 100%;
+  margin: 80px auto 0;
+  display: flex;
+  justify-content: center;
+}
+
+.postListWrapper {
+  margin-top: 30px;
+}
+
+form > input + input {
+  margin-top: 10px;
+}
+
+.fileInput {
+  display: none;
+}
+
+.postActions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: flex-end;
+}

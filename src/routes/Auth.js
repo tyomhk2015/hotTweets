@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import { firebaseObj, authService } from '../firebase_assets';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faTwitter,
+  faGoogle,
+  faGithub,
+} from '@fortawesome/free-brands-svg-icons';
 
 function Auth() {
   const [email, setEmail] = useState('');
@@ -35,27 +41,16 @@ function Auth() {
     }
 
     // Invoke the pop up for signing in.
-    const data = await authService.signInWithPopup(provider);
-
-    console.log(data);
+    await authService.signInWithPopup(provider);
   };
 
   const onSubmit = async (event) => {
     event.preventDefault();
-    let accountData;
     try {
       if (isUnregistered) {
-        accountData = await authService.createUserWithEmailAndPassword(
-          email,
-          password
-        );
-        console.log('create', accountData);
+        await authService.createUserWithEmailAndPassword(email, password);
       } else {
-        accountData = await authService.signInWithEmailAndPassword(
-          email,
-          password
-        );
-        console.log('sign in', accountData);
+        await authService.signInWithEmailAndPassword(email, password);
       }
     } catch (error) {
       console.log(error);
@@ -66,9 +61,14 @@ function Auth() {
   const toggleAccount = () => setIsUnregistered((prev) => !prev);
 
   return (
-    <div>
-      <h3>Auth</h3>
-      <form onSubmit={onSubmit}>
+    <div className='authContainer'>
+      <FontAwesomeIcon
+        icon={faTwitter}
+        color={'#04AAFF'}
+        size='3x'
+        style={{ marginBottom: 30 }}
+      />
+      <form onSubmit={onSubmit} className='container'>
         <input
           type='email'
           name='email'
@@ -85,18 +85,22 @@ function Auth() {
           required
           onChange={onChange}
         />
-        <input type='submit' value={isUnregistered ? 'Sign Up' : 'Log In'} />
-        {error ? <p>{error}</p> : null}
+        {error && <span className='authError'>{error}</span>}
+        <input
+          type='submit'
+          className='authInput authSubmit'
+          value={isUnregistered ? 'Create Account' : 'Sign In'}
+        />
       </form>
-      <span onClick={toggleAccount}>
-        {isUnregistered ? 'Sign Up' : 'Log In'}
+      <span onClick={toggleAccount} className='authSwitch'>
+        {isUnregistered ? 'Log In' : 'Sign Up'}
       </span>
-      <div>
-        <button name='Google' onClick={onSocialClick}>
-          Login w/ Google
+      <div className='authBtns'>
+        <button name='Google' className='authBtn' onClick={onSocialClick}>
+          <FontAwesomeIcon icon={faGoogle} />
         </button>
-        <button name='Github' onClick={onSocialClick}>
-          Login w/ Github
+        <button name='Github' className='authBtn' onClick={onSocialClick}>
+          <FontAwesomeIcon icon={faGithub} />
         </button>
       </div>
     </div>

@@ -2,11 +2,13 @@ import React, { useState, useEffect } from 'react';
 import { dbService, storageService } from 'firebase_assets';
 import { v4 as uuidv4 } from 'uuid';
 import Post from './Post';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 function Home({ user }) {
   const [post, setPost] = useState('');
   const [postsData, setPostsData] = useState([]);
-  const [uploadingFile, setUploadingFile] = useState('');
+  const [uploadingFile, setUploadingFile] = useState(null);
 
   useEffect(() => {
     dbService
@@ -25,26 +27,29 @@ function Home({ user }) {
   const onSubmit = async (event) => {
     event.preventDefault();
 
-    let fileURL = "";
+    let fileURL = '';
 
     // If there is attached file, uploadingFile, save the date_url of the image.
-    if(!!uploadingFile) {
+    if (!!uploadingFile) {
       // Just like adding a document in a collection.
       // Prepare a document for current user to store the file, w/ a random name, by getting reference from the firestore storage.
-      const uploadingFileRef = storageService.ref().child(`${user.uid}/${uuidv4()}`);
+      const uploadingFileRef = storageService
+        .ref()
+        .child(`${user.uid}/${uuidv4()}`);
       // Settings for uploading a file in String.
-      const response = await uploadingFileRef.putString(uploadingFile, 'data_url');
-      console.log(response);
+      const response = await uploadingFileRef.putString(
+        uploadingFile,
+        'data_url'
+      );
       // Get the proper download path for this attachment file.
       fileURL = await response.ref.getDownloadURL();
     }
-
     const postObj = {
       text: post,
       createdDate: Date.now(),
       creator: user.uid,
       image: fileURL,
-    }
+    };
 
     // Register the current post.
     await dbService.collection('posts').add(postObj);
@@ -63,52 +68,74 @@ function Home({ user }) {
 
   const uploadFile = (event) => {
     // Take a file from the user and upload the file suitable for showing w/ URL.
-    const {target: {files}} = event;
+    const {
+      target: { files },
+    } = event;
     const targetFile = files[0];
     const fileReader = new FileReader();
     fileReader.onloadend = (event) => {
       // Put string of data URL of the picture in the state.
-      const {currentTarget : {result}} = event;
+      const {
+        currentTarget: { result },
+      } = event;
       setUploadingFile(result);
-    }
+    };
     fileReader.readAsDataURL(targetFile);
-  }
+  };
 
   const cancelUploadingfile = () => {
     // Hide the attached file
     setUploadingFile(null);
-  }
+  };
   return (
-    <>
-      <form onSubmit={onSubmit}>
-        <input
-          type='text'
-          placeholder='Speak your mind!'
-          maxLength={300}
-          onChange={onChange}
-        />
-        <input type="file" accept="image/*" onChange={uploadFile} />
-        <br />
-        <input type='submit' value='Post' />
-        {uploadingFile && (
-          <div>
-            <img src={uploadingFile} width="40px" height="40px" alt="Your uploaded file" />
-            <button onClick={cancelUploadingfile} >Clear the file.</button>
-          </div>
-        )}
-      </form>
-      <ol>
-        {postsData.map((post) => {
-          return (
-            <Post
-              key={post.id}
-              post={post}
-              isOwner={post.creator === user.uid}
+    <div className="routesWrapper">
+      <div className="container">
+        <form onSubmit={onSubmit} className='postForm'>
+          <div className='postInput__container'>
+            <input
+              type='text'
+              className='postInput__input'
+              placeholder='Speak your mind!'
+              maxLength={300}
+              onChange={onChange}
             />
-          );
-        })}
-      </ol>
-    </>
+            <div className="postActions">
+              <label htmlFor='attach-file' className='postInput__label'>
+                <FontAwesomeIcon icon={faPlus} />
+              </label>
+              <input id="attach-file" type='file' accept='image/*' className="fileInput" onChange={uploadFile} />
+              <input type='submit' value='&rarr;' className='postInput__arrow' />
+              {uploadingFile && (
+                <div className="postForm__attachment">
+                  <img
+                    src={uploadingFile}
+                    style={{
+                      backgroundImage: uploadingFile,
+                    }}
+                    alt="background"
+                  />
+                  <div className="postForm__clear" onClick={cancelUploadingfile}>
+                    <span>Remove</span>
+                    <FontAwesomeIcon icon={faTimes} />
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </form>
+        <ol className="postListWrapper">
+          {postsData.map((post) => {
+            return (
+              <Post
+                key={post.id}
+                post={post}
+                isOwner={post.creator === user.uid}
+              />
+            );
+          })}
+        </ol>
+      </div>
+    </div>
   );
 }
 
