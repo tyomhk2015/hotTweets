@@ -1,4 +1,4 @@
-import { HashRouter as Router, Route, Routes } from "react-router-dom";
+import { HashRouter, Router, Route, Routes } from "react-router-dom";
 import Auth from "routes/Auth";
 import Home from "routes/Home";
 import Profile from "routes/Profile";
@@ -7,7 +7,7 @@ import Navigation from "components/Navigation";
 
 const AppRouter = (props) => {
   return (
-  <Router>
+  <HashRouter base="/">
     {props.isLoggedIn && <Navigation user={props.user}/>}
     <Routes>
       {props.isLoggedIn ? (
@@ -19,7 +19,7 @@ const AppRouter = (props) => {
         <Route exact path="/" element={<Auth />} />
       }
     </Routes>
-  </Router>
+  </HashRouter>
   );
 }
 
