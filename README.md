@@ -24,5 +24,9 @@ Cloud & Hosting -
 
 <hr>
 
-### Acquirement 📝
+### Learned 📝
 
+1. Oauth w/ Firebase
+2. CRUD of documents w/ Firebase
+3. Watching changes of documents w/ Firebase
+4. Attaching files to input tag.
