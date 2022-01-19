@@ -30,3 +30,4 @@ Cloud & Hosting -
 2. CRUD of documents w/ Firebase
 3. Watching changes of documents w/ Firebase
 4. Attaching files to input tag.
+5. React Router does not work well with github pages (2022/1/19)
